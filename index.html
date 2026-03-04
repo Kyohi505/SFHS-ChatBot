@@ -21,20 +21,35 @@
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--green-pale);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 16px;
+
+      /* =====================================================
+         BACKGROUND — change this to whatever you want!
+
+         Option A: solid color
+           background: #f2faf4;
+
+         Option B: gradient
+           background: linear-gradient(135deg, #0d4a1f, #1a7a35);
+
+         Option C: your own image — put e.g. bg.jpg in your project folder
+           background: url('bg.jpg') center/cover no-repeat fixed;
+
+         Currently set to: soft green gradient
+      ====================================================== */
+      background: url('bg.jpg') center/cover no-repeat fixed;
     }
 
     body::before {
       content: '';
       position: fixed; inset: 0;
       background:
-        radial-gradient(circle at 10% 15%, rgba(34,160,69,0.08) 0%, transparent 45%),
-        radial-gradient(circle at 88% 82%, rgba(13,74,31,0.07) 0%, transparent 40%);
+        radial-gradient(circle at 10% 15%, rgba(34,160,69,0.10) 0%, transparent 45%),
+        radial-gradient(circle at 88% 82%, rgba(13,74,31,0.08) 0%, transparent 40%);
       pointer-events: none;
     }
 
@@ -45,7 +60,7 @@
       max-height: 860px;
       background: var(--white);
       border-radius: 24px;
-      box-shadow: 0 0 0 1px rgba(13,74,31,0.09), 0 24px 64px rgba(13,74,31,0.13);
+      box-shadow: 0 0 0 1px rgba(13,74,31,0.09), 0 24px 64px rgba(13,74,31,0.18);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -54,7 +69,7 @@
       animation: rise 0.55s cubic-bezier(0.22,1,0.36,1) both;
     }
 
-    /* ── HEADER ── */
+    /* HEADER */
     .header {
       background: linear-gradient(135deg, var(--green-deep) 0%, #155c27 60%, var(--green-mid) 100%);
       padding: 16px 20px;
@@ -82,10 +97,12 @@
       background: white;
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      overflow: hidden;
       padding: 3px;
     }
 
-    .logo-wrap svg { width: 100%; height: 100%; }
+    .logo-wrap img,
+    .logo-wrap svg { width: 100%; height: 100%; object-fit: contain; }
 
     .header-info h1 {
       font-family: 'Libre Baskerville', serif;
@@ -120,7 +137,7 @@
       animation: blink 2s infinite;
     }
 
-    /* ── CHAT ── */
+    /* CHAT */
     .chat-area {
       flex: 1;
       overflow-y: auto;
@@ -135,7 +152,6 @@
     .chat-area::-webkit-scrollbar { width: 4px; }
     .chat-area::-webkit-scrollbar-thumb { background: var(--gray-line); border-radius: 4px; }
 
-    /* Welcome */
     .welcome {
       background: linear-gradient(160deg, var(--green-light), #dff2e5);
       border: 1px solid #c5e3ce;
@@ -146,16 +162,18 @@
     }
 
     .welcome-seal {
-      width: 60px; height: 60px;
+      width: 64px; height: 64px;
       margin: 0 auto 14px;
       background: white;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 18px rgba(13,74,31,0.18);
+      overflow: hidden;
       padding: 5px;
     }
 
-    .welcome-seal svg { width: 100%; height: 100%; }
+    .welcome-seal img,
+    .welcome-seal svg { width: 100%; height: 100%; object-fit: contain; }
 
     .welcome h2 {
       font-family: 'Libre Baskerville', serif;
@@ -199,7 +217,6 @@
       box-shadow: 0 3px 10px rgba(34,160,69,0.28);
     }
 
-    /* Messages */
     .msg {
       display: flex;
       gap: 9px;
@@ -225,13 +242,10 @@
       padding: 3px;
     }
 
-    .bot .av svg { width: 100%; height: 100%; }
+    .bot .av img,
+    .bot .av svg { width: 100%; height: 100%; object-fit: contain; }
 
-    .user .av {
-      background: var(--green-deep);
-      color: white;
-      font-size: 12px;
-    }
+    .user .av { background: var(--green-deep); color: white; font-size: 12px; }
 
     .bubble {
       padding: 11px 15px;
@@ -253,7 +267,6 @@
       border-top-right-radius: 5px;
     }
 
-    /* Typing */
     .typing .bubble {
       display: flex; gap: 5px; align-items: center;
       padding: 14px 18px;
@@ -269,7 +282,7 @@
     .typing .bubble span:nth-child(2) { animation-delay: 0.18s; }
     .typing .bubble span:nth-child(3) { animation-delay: 0.36s; }
 
-    /* ── INPUT ── */
+    /* INPUT */
     .input-area {
       padding: 12px 16px 16px;
       border-top: 1px solid var(--gray-line);
@@ -321,17 +334,10 @@
     #send-btn:hover { transform: scale(1.07); box-shadow: 0 4px 14px rgba(34,160,69,0.4); }
     #send-btn:active { transform: scale(0.96); }
     #send-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
-
     #send-btn svg { width: 15px; height: 15px; fill: white; }
 
-    .hint {
-      text-align: center;
-      font-size: 0.69rem;
-      color: #b8ccbc;
-      margin-top: 8px;
-    }
+    .hint { text-align: center; font-size: 0.69rem; color: #b8ccbc; margin-top: 8px; }
 
-    /* ── ANIMATIONS ── */
     @keyframes rise {
       from { opacity: 0; transform: translateY(20px) scale(0.97); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
@@ -358,26 +364,24 @@
 <div class="container">
 
   <div class="header">
-    <div class="logo-wrap" id="header-logo">
-      <!-- SFHS Seal SVG (green, torch & laurel) -->
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <div class="logo-wrap">
+      <img src="logo.jpg" alt="SFHS Seal"
+           onerror="this.style.display='none';document.getElementById('fallback-svg').style.display='block'"/>
+      <svg id="fallback-svg" style="display:none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <circle cx="50" cy="50" r="48" fill="#1a7a35"/>
         <circle cx="50" cy="50" r="42" fill="none" stroke="white" stroke-width="1.5"/>
         <rect x="47" y="37" width="6" height="23" rx="2" fill="white"/>
         <ellipse cx="50" cy="35" rx="5" ry="7" fill="#a8e6b8"/>
         <ellipse cx="34" cy="47" rx="7.5" ry="3.5" fill="white" transform="rotate(-35 34 47)"/>
         <ellipse cx="30" cy="55" rx="7.5" ry="3.5" fill="white" transform="rotate(-20 30 55)"/>
-        <ellipse cx="29" cy="63" rx="7" ry="3" fill="white" transform="rotate(-8 29 63)"/>
         <ellipse cx="66" cy="47" rx="7.5" ry="3.5" fill="white" transform="rotate(35 66 47)"/>
         <ellipse cx="70" cy="55" rx="7.5" ry="3.5" fill="white" transform="rotate(20 70 55)"/>
-        <ellipse cx="71" cy="63" rx="7" ry="3" fill="white" transform="rotate(8 71 63)"/>
         <rect x="46" y="59" width="8" height="5" rx="1.5" fill="white"/>
-        <path d="M38 70 Q50 75 62 70" stroke="white" stroke-width="1.5" fill="none"/>
       </svg>
     </div>
     <div class="header-info">
       <h1>San Francisco High School</h1>
-      <p>Quezon City · Est. 1957 · School Chatbot</p>
+      <p>Quezon City · Est. 1954 · School Chatbot</p>
     </div>
     <div class="online">Online</div>
   </div>
@@ -385,21 +389,19 @@
   <div class="chat-area" id="chat-area">
     <div class="welcome" id="welcome">
       <div class="welcome-seal">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <img src="logo.jpg" alt="SFHS Seal"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <svg style="display:none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <circle cx="50" cy="50" r="48" fill="#1a7a35"/>
           <circle cx="50" cy="50" r="42" fill="none" stroke="white" stroke-width="1.5"/>
           <rect x="47" y="37" width="6" height="23" rx="2" fill="white"/>
           <ellipse cx="50" cy="35" rx="5" ry="7" fill="#a8e6b8"/>
           <ellipse cx="34" cy="47" rx="7.5" ry="3.5" fill="white" transform="rotate(-35 34 47)"/>
-          <ellipse cx="30" cy="55" rx="7.5" ry="3.5" fill="white" transform="rotate(-20 30 55)"/>
-          <ellipse cx="29" cy="63" rx="7" ry="3" fill="white" transform="rotate(-8 29 63)"/>
           <ellipse cx="66" cy="47" rx="7.5" ry="3.5" fill="white" transform="rotate(35 66 47)"/>
-          <ellipse cx="70" cy="55" rx="7.5" ry="3.5" fill="white" transform="rotate(20 70 55)"/>
-          <ellipse cx="71" cy="63" rx="7" ry="3" fill="white" transform="rotate(8 71 63)"/>
           <rect x="46" y="59" width="8" height="5" rx="1.5" fill="white"/>
         </svg>
       </div>
-      <h2>Mabuhay, Falcon! 🌿</h2>
+      <h2>Mabuhay, Kikonians! 🌿</h2>
       <p>Welcome to the official SFHS Assistant. Ask me about our history, academic strands, campus buildings, and more.</p>
       <div class="chips">
         <div class="chip" onclick="askChip(this)">What strands are offered?</div>
@@ -445,22 +447,34 @@
     if (w) w.remove();
   }
 
-  const sealSVG = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="48" fill="#1a7a35"/>
-    <rect x="47" y="37" width="6" height="23" rx="2" fill="white"/>
-    <ellipse cx="50" cy="35" rx="5" ry="7" fill="#a8e6b8"/>
-    <ellipse cx="34" cy="47" rx="7.5" ry="3.5" fill="white" transform="rotate(-35 34 47)"/>
-    <ellipse cx="66" cy="47" rx="7.5" ry="3.5" fill="white" transform="rotate(35 66 47)"/>
-  </svg>`;
+  // Bot avatar: tries real logo first, falls back to SVG
+  function makeBotAvatar() {
+    const av = document.createElement('div');
+    av.className = 'av';
+    av.innerHTML = `
+      <img src="logo.jpg" alt="SFHS"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+      <svg style="display:none;width:100%;height:100%" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="48" fill="#1a7a35"/>
+        <rect x="47" y="37" width="6" height="23" rx="2" fill="white"/>
+        <ellipse cx="50" cy="35" rx="5" ry="7" fill="#a8e6b8"/>
+        <ellipse cx="34" cy="47" rx="7.5" ry="3.5" fill="white" transform="rotate(-35 34 47)"/>
+        <ellipse cx="66" cy="47" rx="7.5" ry="3.5" fill="white" transform="rotate(35 66 47)"/>
+      </svg>`;
+    return av;
+  }
 
   function addMessage(text, sender) {
     removeWelcome();
     const msg = document.createElement('div');
     msg.className = `msg ${sender}`;
 
-    const av = document.createElement('div');
-    av.className = 'av';
-    av.innerHTML = sender === 'bot' ? sealSVG : '👤';
+    const av = sender === 'bot' ? makeBotAvatar() : (() => {
+      const d = document.createElement('div');
+      d.className = 'av';
+      d.textContent = '👤';
+      return d;
+    })();
 
     const bubble = document.createElement('div');
     bubble.className = 'bubble';
@@ -477,8 +491,9 @@
     const msg = document.createElement('div');
     msg.className = 'msg bot typing';
     msg.id = 'typing';
-    msg.innerHTML = `<div class="av">${sealSVG}</div>
-      <div class="bubble"><span></span><span></span><span></span></div>`;
+    const av = makeBotAvatar();
+    msg.appendChild(av);
+    msg.innerHTML += `<div class="bubble"><span></span><span></span><span></span></div>`;
     chatArea.appendChild(msg);
     chatArea.scrollTop = chatArea.scrollHeight;
   }
