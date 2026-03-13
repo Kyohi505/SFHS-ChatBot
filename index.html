@@ -26,21 +26,6 @@
       align-items: center;
       justify-content: center;
       padding: 16px;
-
-      /* =====================================================
-         BACKGROUND — change this to whatever you want!
-
-         Option A: solid color
-           background: #f2faf4;
-
-         Option B: gradient
-           background: linear-gradient(135deg, #0d4a1f, #1a7a35);
-
-         Option C: your own image — put e.g. bg.jpg in your project folder
-           background: url('bg.jpg') center/cover no-repeat fixed;
-
-         Currently set to: soft green gradient
-      ====================================================== */
       background: url('bg.jpg') center/cover no-repeat fixed;
     }
 
@@ -478,7 +463,11 @@
 
     const bubble = document.createElement('div');
     bubble.className = 'bubble';
-    bubble.textContent = text;
+    bubble.innerHTML = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n\n/g, '<br><br>')
+      .replace(/\n/g, '<br>')
+      .replace(/(\d+)\.\s/g, '<br>$1. ');
 
     msg.appendChild(av);
     msg.appendChild(bubble);
